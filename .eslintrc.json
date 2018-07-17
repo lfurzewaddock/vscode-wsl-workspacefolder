@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "no-var": "off",
+    "quotes": ["error", "double"],
+    "prefer-arrow-callback": [ "error", { "allowNamedFunctions": true } ],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["./bin/**/*", "./test/**/*.js", "./webpack/**/*.js"]}],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-use-before-define":"off",
+    "strict":"off"
+  }
+}

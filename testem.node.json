@@ -1,0 +1,14 @@
+{
+  "src_files": [
+    "src/**/*.js",
+    "test/**/*.test.js"
+  ],
+  "framework": "tap",
+  "launchers": {
+    "Node": {
+      "command": "tape --require esm test/{,**/}/*.test.js",
+      "protocol": "tap"
+    }
+  },
+  "launch_in_dev": ["Node"]
+}

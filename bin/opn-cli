@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+
+"use strict";
+
+const open = require("opn");
+const parseArgs = require("minimist");
+
+const args = parseArgs(process.argv.slice(2), {
+  boolean: ["help", "h", "wait"],
+  "--": true,
+});
+
+if (args.h || args.help) {
+  error(null, true);
+} else if (targetFileOrUrl(args._[0])) {
+  openTarget(targetFileOrUrl(args._[0]), args.wait, args["--"]);
+} else if (process.argv.length <= 2) {
+  error("Target to open not provided!", true);
+} else {
+  error("Usage incorrect!", true);
+}
+
+function targetFileOrUrl(targetArgs) {
+  if (typeof targetArgs === "string" && targetArgs.length > 0) {
+    const [fileOrUrl] = args._;
+    return fileOrUrl;
+  }
+  return null;
+}
+
+function openTarget(target, wait, options) {
+  var appOptions = {
+    wait,
+  };
+  if (options.length > 0) {
+    appOptions.app = options;
+  }
+  open(target, appOptions);
+}
+
+function printHelp() {
+  /* eslint-disable no-console */
+  console.log(`
+  
+    opn-cli usage: <file|url> [--wait] [-- <app> [args]
+
+    -h, --help                 output usage information
+    <file|url>                 open target file/url in OS default app for file type
+    --wait                     wait for app opened to exit before fulfilling promise
+    -- <app> [args]            specify which app to open instead of OS default app including optional arguments
+
+  `);
+  /* eslint-enable no-console */
+}
+
+function error(err, showHelp = false) {
+  if (err) {
+    /* eslint-disable no-console */
+    console.log(`
+
+      ${err.toString()}
+
+    `);
+    /* eslint-enable no-console */
+  }
+  if (showHelp) {
+    printHelp();
+  }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "uri": {
+      "_formatted": "file:///d%3A/Users/Me/Projects/project",
+      "_fsPath": "c:\\Users\\Me\\Projects\\project",
+      "authority": "",
+      "fragment": "",
+      "fsPath": "c:\\Users\\Me\\Projects\\project",
+      "path": "/c:/Users/Me/Projects/project",
+      "query": "",
+      "scheme": "file"
+    },
+    "name": "workspace name",
+    "index": 0
+  }
+]

@@ -1,0 +1,5 @@
+# Babel output directory
+lib/*
+
+# Node Modules
+node_modules/*
