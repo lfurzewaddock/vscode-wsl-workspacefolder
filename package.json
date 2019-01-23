@@ -1,83 +1,83 @@
 {
-    "name": "vscode-wsl-workspacefolder",
-    "displayName": "WSL workspaceFolder",
-    "description": "Gets workspaceFolder WSL path format.\n\nUse this where WSL path for the workspaceFolder is required, e.g. the 'remoteRoot' property in launch config for debug, etc.",
-    "version": "1.0.2",
-    "publisher": "lfurzewaddock",
-    "icon": "public/assets/images/vscode-wsl-workspacefolder.png",
-    "galleryBanner": {
-        "color": "#007ACC",
-        "theme": "dark"
-    },
-    "keywords": [
-        "WSL",
-        "workspaceFolder",
-        "path",
-        "WSL path format",
-        "Windows path format"
-    ],
-    "bugs": {
-        "url": "https://github.com/lfurzewaddock/vscode-wsl-workspacefolder/issues"
-    },
-    "homepage": "https://github.com/lfurzewaddock/vscode-wsl-workspacefolder/blob/master/README.md",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/lfurzewaddock/vscode-wsl-workspacefolder"
-    },
-    "engines": {
-        "vscode": "^1.24.1"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:extension.vscode-wsl-workspaceFolder"
-    ],
-    "main": "./lib",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.vscode-wsl-workspaceFolder",
-                "title": "WSL workspaceFolder"
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run publish",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "./node_modules/.bin/tape --require esm test/{,**/}/*.test.js | tap-spec",
-        "debug": "DEBUG=vscode-wsl-workspacefolder:* node --nolazy --inspect-brk=5858 ./node_modules/.bin/tape --require esm test/{,**/}/*.test.js",
-        "testem": "testem -f testem.node.json",
-        "publish": "./node_modules/.bin/babel src --out-dir lib",
-        "babel": "./node_modules/.bin/babel src --out-dir lib --source-maps",
-        "lint": "node_modules/.bin/prettier-eslint \"*/**/*.js\" --log-level info",
-        "lintFix": "node_modules/.bin/prettier-eslint  \"*/**/*.js\" --write --log-level warn",
-        "coverage": "node_modules/nyc/bin/nyc.js --require esm --reporter=html tape test/{,**/}/*.test.js | tap-spec && ./bin/opn-cli coverage/index.html -- chrome"
-    },
-    "devDependencies": {
-        "babel-cli": "^6.26.0",
-        "babel-plugin-add-module-exports": "^0.2.1",
-        "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
-        "babel-preset-env": "^1.7.0",
-        "eslint": "^4.19.1",
-        "eslint-config-airbnb": "^17.0.0",
-        "eslint-plugin-import": "^2.13.0",
-        "eslint-plugin-jsx-a11y": "^6.1.0",
-        "eslint-plugin-react": "^7.10.0",
-        "esm": "^3.0.65",
-        "minimist": "^1.2.0",
-        "nyc": "^12.0.2",
-        "opn": "^5.3.0",
-        "prettier-eslint-cli": "^4.7.1",
-        "tap-spec": "^5.0.0",
-        "tape": "^4.9.1",
-        "tape-promise": "^3.0.0",
-        "testem": "^2.8.2"
-    },
-    "dependencies": {
-        "debug": "^3.1.0",
-        "execa": "^0.10.0",
-        "is-wsl": "^1.1.0",
-        "vscode": "^1.1.18"
-    }
+  "name": "vscode-wsl-workspacefolder",
+  "displayName": "WSL workspaceFolder",
+  "description": "Gets workspaceFolder WSL path format.\n\nUse this where WSL path for the workspaceFolder is required, e.g. the 'remoteRoot' property in launch config for debug, etc.",
+  "version": "1.0.2",
+  "publisher": "lfurzewaddock",
+  "icon": "public/assets/images/vscode-wsl-workspacefolder.png",
+  "galleryBanner": {
+    "color": "#007ACC",
+    "theme": "dark"
+  },
+  "keywords": [
+    "WSL",
+    "workspaceFolder",
+    "path",
+    "WSL path format",
+    "Windows path format"
+  ],
+  "bugs": {
+    "url": "https://github.com/lfurzewaddock/vscode-wsl-workspacefolder/issues"
+  },
+  "homepage": "https://github.com/lfurzewaddock/vscode-wsl-workspacefolder/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lfurzewaddock/vscode-wsl-workspacefolder"
+  },
+  "engines": {
+    "vscode": "^1.24.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.vscode-wsl-workspaceFolder"
+  ],
+  "main": "./lib",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.vscode-wsl-workspaceFolder",
+        "title": "WSL workspaceFolder"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run publish",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "./node_modules/.bin/tape --require esm test/{,**/}/*.test.js | tap-spec",
+    "debug": "DEBUG=vscode-wsl-workspacefolder:* node --nolazy --inspect-brk=5858 ./node_modules/.bin/tape --require esm test/{,**/}/*.test.js",
+    "testem": "testem -f testem.node.json",
+    "publish": "./node_modules/.bin/babel src --out-dir lib",
+    "babel": "./node_modules/.bin/babel src --out-dir lib --source-maps",
+    "lint": "node_modules/.bin/prettier-eslint \"*/**/*.js\" --log-level info",
+    "lintFix": "node_modules/.bin/prettier-eslint  \"*/**/*.js\" --write --log-level warn",
+    "coverage": "node_modules/nyc/bin/nyc.js --require esm --reporter=html tape test/{,**/}/*.test.js | tap-spec && ./bin/opn-cli coverage/index.html -- chrome"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.0",
+    "eslint-plugin-react": "^7.10.0",
+    "esm": "^3.0.65",
+    "minimist": "^1.2.0",
+    "nyc": "^12.0.2",
+    "opn": "^5.3.0",
+    "prettier-eslint-cli": "^4.7.1",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1",
+    "tape-promise": "^3.0.0",
+    "testem": "^2.8.2"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "execa": "^0.10.0",
+    "is-wsl": "^1.1.0",
+    "vscode": "^1.1.21"
+  }
 }
