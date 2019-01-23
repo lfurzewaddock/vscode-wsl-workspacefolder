@@ -1,15 +1,9 @@
 import execa from "execa";
 
 async function runWslpathUnderWslEnv(isWslEnv, workspaceFolder) {
-  const { stdout } = await execa(
-    isWslEnv ? "wslpath" : "wsl wslpath",
-    [
-      workspaceFolder,
-    ],
-    {
-      cleanup: true,
-    },
-  );
+  const { stdout } = await execa(isWslEnv ? "wslpath" : "wsl wslpath", [workspaceFolder], {
+    cleanup: true,
+  });
 
   return stdout;
 }

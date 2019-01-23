@@ -7,31 +7,73 @@ import debug from "debug";
 import * as directory from "./directory";
 import unixWinPathFormat from "./unix-win-path-format";
 
+async function showWorkspaceFolderPick() {
+  const workspaceFolder = await window.showWorkspaceFolderPick({ ignoreFocusOut: true });
+  return workspaceFolder;
+}
+
+async function getWorkspaceFolderName() {
+  const workspaceFolder = await showWorkspaceFolderPick();
+  return workspaceFolder.name;
+}
+
+function getEscapedWorkspaceFolderByName(workspaceFolders, workspaceName) {
+  return directory.escapeBackslash(
+    directory.getWorkspaceFolderByName(workspaceFolders, workspaceName),
+  );
+}
+
 function activate(context) {
-  const disposable = commands.registerCommand("extension.vscode-wsl-workspaceFolder", () => {
-    const env = {
-      isLinux: process.platform === "linux",
-      isWin: process.platform === "win32",
-      isWsl,
-    };
+  const disposable = commands.registerCommand(
+    "extension.vscode-wsl-workspaceFolder",
+    async (...args) => {
+      const isExtensionDebug = !!process.env.VSCODE_EXTENSION_WSL_WORKSPACEFOLDER_TEST;
+      const vars = {
+        isLinux: process.platform === "linux",
+        isWin: process.platform === "win32",
+        isWsl,
+        isExtensionDebug,
+      };
 
-    debug("vscode-wsl-workspacefolder:index")(`env.isLinux: ${env.isLinux}`);
-    debug("vscode-wsl-workspacefolder:index")(`env.isWin: ${env.isWin}`);
-    debug("vscode-wsl-workspacefolder:index")(`env.isWsl: ${env.isWsl}`);
+      debug("vscode-wsl-workspacefolder:index")(`env.isLinux: ${vars.isLinux}`);
+      debug("vscode-wsl-workspacefolder:index")(`env.isWin: ${vars.isWin}`);
+      debug("vscode-wsl-workspacefolder:index")(`env.isWsl: ${vars.isWsl}`);
+      debug("vscode-wsl-workspacefolder:index")(`env.isExtensionDebug: ${vars.isExtensionDebug}`);
+      window.showInformationMessage(`env.isLinux: ${vars.isLinux}`);
+      window.showInformationMessage(`env.isWin: ${vars.isWin}`);
+      window.showInformationMessage(`env.isWsl: ${vars.isWsl}`);
+      window.showInformationMessage(`env.isExtensionDebug: ${vars.isExtensionDebug}`);
 
-    const workspaceFolder = directory.escapeBackslash(
-      directory.getWorkspaceFolderByName(workspace.workspaceFolders, workspace.name),
-    );
+      const { workspaceFolders } = workspace;
+      let workspaceName = args[0].name;
 
-    return unixWinPathFormat(workspaceFolder, env)
-      .then((wslPath) => {
-        debug("vscode-wsl-workspacefolder:index")(`stdout: ${wslPath}`);
-        return wslPath;
-      })
-      .catch(() => {
-        window.showInformationMessage("Get WSL workspaceFolder failed!");
-      });
-  });
+      if (typeof workspaceFolders.find(x => x.name === workspaceName) === "undefined") {
+        try {
+          workspaceName = await getWorkspaceFolderName();
+        } catch (error) {
+          window.showErrorMessage("Extension: WSL workspaceFolder failed!");
+          window.showErrorMessage("Error: workspace folder selection required!");
+        }
+      }
+
+      const workspaceFolderUriFsPath = getEscapedWorkspaceFolderByName(
+        workspaceFolders,
+        workspaceName,
+      );
+
+      return unixWinPathFormat(workspaceFolderUriFsPath, vars)
+        .then((wslPath) => {
+          debug("vscode-wsl-workspacefolder:index")(`stdout: ${wslPath}`);
+          // // eslint-disable-next-line no-console
+          // console.log("wslPath:", wslPath);
+          return wslPath;
+        })
+        .catch((err) => {
+          window.showErrorMessage("Extension: WSL workspaceFolder failed!");
+          window.showErrorMessage(`Error: ${err.message}`);
+        });
+    },
+  );
 
   context.subscriptions.push(disposable);
 }

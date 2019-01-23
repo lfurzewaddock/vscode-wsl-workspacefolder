@@ -3,30 +3,31 @@
 // Hover to view descriptions of existing attributes.
 // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 {
-	"version": "0.2.0",
-    "configurations": [
-      {
-        "type": "node",
-        "request": "attach",
-        "name": "Attach to Remote",
-        "address": "localhost",
-        "port": 5858,
-        "sourceMaps": false,
-        "localRoot": "${workspaceFolder}",
-        "remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}"
-      },
-      {
-        "name": "Test Extension",
-        "type": "extensionHost",
-        "request": "launch",
-        "runtimeExecutable": "${execPath}",
-        "preLaunchTask": "npm: babel",
-        "sourceMaps": true,
-        "args": [
-            "--extensionDevelopmentPath=${workspaceFolder}"
-        ]
-      },
-      {
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Remote",
+      "address": "localhost",
+      "port": 5858,
+      "sourceMaps": false,
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}"
+    },
+    {
+      "name": "Test Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "preLaunchTask": "npm: babel",
+      "sourceMaps": true,
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+      "env": {
+        "VSCODE_EXTENSION_WSL_WORKSPACEFOLDER_TEST": "true"
+      }
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch npm Debug",
@@ -36,15 +37,12 @@
       "args": [],
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run-script",
-        "debug"
-      ],
+      "runtimeArgs": ["run-script", "debug"],
       "env": {
         "NODE_ENV": "development"
       },
       "port": 5858,
       "console": "internalConsole"
     }
-    ]
+  ]
 }
