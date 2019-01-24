@@ -13,7 +13,10 @@
       "port": 5858,
       "sourceMaps": false,
       "localRoot": "${workspaceFolder}",
-      "remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}"
+      "remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+      "windows": {
+        "name": "vscode-wsl-workspaceFolder"
+      }
     },
     {
       "name": "Test Extension",

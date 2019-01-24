@@ -14,7 +14,7 @@ async function showWorkspaceFolderPick() {
 
 async function getWorkspaceFolderName() {
   const workspaceFolder = await showWorkspaceFolderPick();
-  return workspaceFolder.name;
+  return workspaceFolder.name.toLowerCase();
 }
 
 function getEscapedWorkspaceFolderByName(workspaceFolders, workspaceName) {
@@ -45,9 +45,11 @@ function activate(context) {
       window.showInformationMessage(`env.isExtensionDebug: ${vars.isExtensionDebug}`);
 
       const { workspaceFolders } = workspace;
-      let workspaceName = args[0].name;
+      let workspaceName = args[0].name.toLowerCase();
 
-      if (typeof workspaceFolders.find(x => x.name === workspaceName) === "undefined") {
+      if (
+        typeof workspaceFolders.find(x => x.name.toLowerCase() === workspaceName) === "undefined"
+      ) {
         try {
           workspaceName = await getWorkspaceFolderName();
         } catch (error) {

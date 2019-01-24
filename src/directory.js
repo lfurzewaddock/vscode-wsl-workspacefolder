@@ -8,7 +8,12 @@ export function escapeBackslash(path) {
 }
 
 export function getWorkspaceFolderByName(workspaceFolders, workspaceFolderName) {
-  debug("vscode-wsl-workspacefolder:directory")("getWorkspaceFolderByName workspaceFolders: %o", workspaceFolders);
-  debug("vscode-wsl-workspacefolder:directory")(`getWorkspaceFolderByName workspaceFolderName: ${workspaceFolderName}`);
-  return workspaceFolders.find(f => f.name === workspaceFolderName).uri.fsPath;
+  debug("vscode-wsl-workspacefolder:directory")(
+    "getWorkspaceFolderByName workspaceFolders: %o",
+    workspaceFolders,
+  );
+  debug("vscode-wsl-workspacefolder:directory")(
+    `getWorkspaceFolderByName workspaceFolderName: ${workspaceFolderName}`,
+  );
+  return workspaceFolders.find(f => f.name.toLowerCase() === workspaceFolderName).uri.fsPath;
 }
