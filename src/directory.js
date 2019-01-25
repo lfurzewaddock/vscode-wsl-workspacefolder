@@ -15,5 +15,6 @@ export function getWorkspaceFolderByName(workspaceFolders, workspaceFolderName) 
   debug("vscode-wsl-workspacefolder:directory")(
     `getWorkspaceFolderByName workspaceFolderName: ${workspaceFolderName}`,
   );
-  return workspaceFolders.find(f => f.name.toLowerCase() === workspaceFolderName).uri.fsPath;
+  return workspaceFolders.find(f => f.name.toLowerCase() === workspaceFolderName.toLowerCase()).uri
+    .fsPath;
 }

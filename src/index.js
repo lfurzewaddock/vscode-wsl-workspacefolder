@@ -39,16 +39,18 @@ function activate(context) {
       debug("vscode-wsl-workspacefolder:index")(`env.isWin: ${vars.isWin}`);
       debug("vscode-wsl-workspacefolder:index")(`env.isWsl: ${vars.isWsl}`);
       debug("vscode-wsl-workspacefolder:index")(`env.isExtensionDebug: ${vars.isExtensionDebug}`);
-      window.showInformationMessage(`env.isLinux: ${vars.isLinux}`);
-      window.showInformationMessage(`env.isWin: ${vars.isWin}`);
-      window.showInformationMessage(`env.isWsl: ${vars.isWsl}`);
-      window.showInformationMessage(`env.isExtensionDebug: ${vars.isExtensionDebug}`);
+      // window.showInformationMessage(`env.isLinux: ${vars.isLinux}`);
+      // window.showInformationMessage(`env.isWin: ${vars.isWin}`);
+      // window.showInformationMessage(`env.isWsl: ${vars.isWsl}`);
+      // window.showInformationMessage(`env.isExtensionDebug: ${vars.isExtensionDebug}`);
 
       const { workspaceFolders } = workspace;
-      let workspaceName = args[0].name.toLowerCase();
+      let workspaceName = (Array.isArray(workspaceFolders) && workspaceFolders.length > 1)
+        ? args[0].name
+        : workspace.name;
 
       if (
-        typeof workspaceFolders.find(x => x.name.toLowerCase() === workspaceName) === "undefined"
+        typeof workspaceFolders.find(x => x.name.toLowerCase() === workspaceName.toLowerCase()) === "undefined"
       ) {
         try {
           workspaceName = await getWorkspaceFolderName();
