@@ -1,7 +1,7 @@
 {
   "name": "vscode-wsl-workspacefolder",
   "displayName": "WSL workspaceFolder",
-  "description": "Translates `workspaceFolder` path into WSL path format.\n\nUseful where WSL format workspaceFolder path is required, e.g. for debug 'remoteRoot' property in launch config, etc.",
+  "description": "Returns `workspaceFolder` as a WSL path.\n\nUseful where WSL format workspaceFolder path is required, e.g. for debug 'remoteRoot' property in launch config, etc.",
   "version": "1.1.2",
   "publisher": "lfurzewaddock",
   "icon": "public/assets/images/vscode-wsl-workspacefolder.png",
