@@ -93,19 +93,11 @@ e.g. `.vscode/launch.json`
 
 ## Release Notes
 
-### 1.1.0
+### 1.1.2
 
 Add support for multi-root projects
 
 ### 1.0.2
-
-Minor corrections/changes to docs
-
-### 1.0.1
-
-Minor corrections/changes to docs
-
-### 1.0.0
 
 Initial release of VS Code extension `vscode-wsl-workspacefolder`
 
