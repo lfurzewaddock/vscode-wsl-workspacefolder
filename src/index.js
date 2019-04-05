@@ -24,7 +24,7 @@ function getEscapedWorkspaceFolderByName(workspaceFolders, workspaceName) {
 }
 
 function activate(context) {
-  const disposable = commands.registerCommand(
+  const disposableWorkspace = commands.registerCommand(
     "extension.vscode-wsl-workspaceFolder",
     async (...args) => {
       const isExtensionDebug = !!process.env.VSCODE_EXTENSION_WSL_WORKSPACEFOLDER_TEST;
@@ -79,7 +79,44 @@ function activate(context) {
     },
   );
 
-  context.subscriptions.push(disposable);
+  const disposableFile = commands.registerCommand(
+    "extension.vscode-wsl-workspaceCurrentFile",
+    async () => {
+      const isExtensionDebug = !!process.env.VSCODE_EXTENSION_WSL_WORKSPACEFOLDER_TEST;
+      const vars = {
+        isLinux: process.platform === "linux",
+        isWin: process.platform === "win32",
+        isWsl,
+        isExtensionDebug,
+      };
+
+      let fileUri;
+      if (
+        window && window.activeTextEditor && window.activeTextEditor.document
+        && window.activeTextEditor.document.uri
+      ) {
+        try {
+          fileUri = window.activeTextEditor.document.uri.fsPath;
+        } catch (error) {
+          window.showErrorMessage("Extension: WSL Current File failed!");
+          window.showErrorMessage("Error: Open file required!");
+        }
+      }
+
+      return unixWinPathFormat(fileUri, vars)
+        .then((wslPath) => {
+          debug("vscode-wsl-workspacefolder:index")(`stdout: ${wslPath}`);
+          return wslPath;
+        })
+        .catch((err) => {
+          window.showErrorMessage("Extension: WSL Current File failed!");
+          window.showErrorMessage(`Error: ${err.message}`);
+        });
+    },
+  );
+
+  context.subscriptions.push(disposableWorkspace);
+  context.subscriptions.push(disposableFile);
 }
 exports.activate = activate;
 

@@ -6,7 +6,7 @@ Use command as a placeholder where WSL path for the `workspaceFolder` is require
 
 ## Features
 
-This extension returns the `workspaceFolder` path, converted from Windows path format to WSL path format. For example, a `workspaceFolder` with a windows path of `c:\\Users\\Me\\Projects\\project` would return a WSL path of `/mnt/c/Users/Me/Projects/project`.
+This extension returns some VS Code workspace file variables, converted from Windows path format to WSL path format. For example, a `workspaceFolder` with a windows path of `c:\\Users\\Me\\Projects\\project` would return a WSL path of `/mnt/c/Users/Me/Projects/project`.
 
 ## Requirements
 
@@ -17,9 +17,10 @@ This extension returns the `workspaceFolder` path, converted from Windows path f
 
 ## Extension Settings
 
-This extension contributes the following command:
+This extension contributes the following commands:
 
 - `extension.vscode-wsl-workspaceFolder`: returns WSL format path string to workspaceFolder
+- `extension.vscode-wsl-workspaceCurrentFile`: returns WSL format path string to the currently open file in your workspace
 
 ## Usage
 
