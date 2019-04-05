@@ -78,12 +78,12 @@
     "tap-spec": "^5.0.0",
     "tape": "^4.9.1",
     "tape-promise": "^3.0.0",
-    "testem": "^2.14.0"
+    "testem": "^2.14.0",
+    "vscode": "^1.1.33"
   },
   "dependencies": {
     "debug": "^3.1.0",
     "execa": "^0.10.0",
-    "is-wsl": "^1.1.0",
-    "vscode": "^1.1.21"
+    "is-wsl": "^1.1.0"
   }
 }
