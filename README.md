@@ -19,8 +19,8 @@ This extension returns some VS Code workspace file variables, converted from Win
 
 This extension contributes the following commands:
 
-- `extension.vscode-wsl-workspaceFolder`: returns WSL format path string to workspaceFolder
-- `extension.vscode-wsl-workspaceCurrentFile`: returns WSL format path string to the currently open file in your workspace
+- `extension.vscode-wsl-workspaceFolder`: returns WSL format path string to workspaceFolder (replacement for the VS Code `${workspaceFolder}` variable)
+- `extension.vscode-wsl-workspaceCurrentFile`: returns WSL format path string to the currently open file in your workspace (replacement for the VS Code `${file}` variable)
 
 ## Usage
 
@@ -28,7 +28,7 @@ This extension contributes the following commands:
 
 e.g. `.vscode/launch.json`
 
-```
+```json
 // A launch configuration that launches the extension inside a new window
 // Use IntelliSense to learn about possible attributes.
 // Hover to view descriptions of existing attributes.
@@ -56,7 +56,7 @@ Optional: add windows.name property to config (used to link/associate an 'Attach
 
 e.g. `.vscode/launch.json`
 
-```
+```json
 // A launch configuration that launches the extension inside a new window
 // Use IntelliSense to learn about possible attributes.
 // Hover to view descriptions of existing attributes.
@@ -78,6 +78,30 @@ e.g. `.vscode/launch.json`
         }
       }
     ]
+}
+```
+
+### Run the open file
+
+Sometimes you have multiple runnable scripts in a single project and you want to run the file currently open in your workspace. Examples are a collection of Python scripts or Mocha tests. Here is an example for running the currently open Mocha test.
+
+```json
+{
+  "type": "node",
+  "request": "launch",
+  "name": "Mocha Current File (WSL)",
+  "useWSL": true,
+  "localRoot": "${workspaceFolder}",
+  "remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+  "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+  "args": [
+    "${command:extension.vscode-wsl-workspaceCurrentFile}"
+  ],
+  "skipFiles": [
+    "${command:extension.vscode-wsl-workspaceFolder}/node_modules/**/*.js",
+    "${command:extension.vscode-wsl-workspaceFolder}/lib/**/*.js",
+    "<node_internals>/**"
+  ]
 }
 ```
 
