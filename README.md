@@ -6,7 +6,7 @@ Use command as a placeholder where WSL path for the `workspaceFolder` is require
 
 ## Features
 
-This extension returns the `workspaceFolder` path, converted from Windows path format to WSL path format. For example, a `workspaceFolder` with a windows path of `c:\\Users\\Me\\Projects\\project` would return a WSL path of `/mnt/c/Users/Me/Projects/project`.
+This extension returns some VS Code workspace file variables, converted from Windows path format to WSL path format. For example, a `workspaceFolder` with a windows path of `c:\\Users\\Me\\Projects\\project` would return a WSL path of `/mnt/c/Users/Me/Projects/project`.
 
 ## Requirements
 
@@ -17,9 +17,10 @@ This extension returns the `workspaceFolder` path, converted from Windows path f
 
 ## Extension Settings
 
-This extension contributes the following command:
+This extension contributes the following commands:
 
-- `extension.vscode-wsl-workspaceFolder`: returns WSL format path string to workspaceFolder
+- `extension.vscode-wsl-workspaceFolder`: returns WSL format path string to workspaceFolder (replacement for the VS Code `${workspaceFolder}` variable)
+- `extension.vscode-wsl-workspaceCurrentFile`: returns WSL format path string to the currently open file in your workspace (replacement for the VS Code `${file}` variable)
 
 ## Usage
 
@@ -27,7 +28,7 @@ This extension contributes the following command:
 
 e.g. `.vscode/launch.json`
 
-```
+```json
 // A launch configuration that launches the extension inside a new window
 // Use IntelliSense to learn about possible attributes.
 // Hover to view descriptions of existing attributes.
@@ -55,7 +56,7 @@ Optional: add windows.name property to config (used to link/associate an 'Attach
 
 e.g. `.vscode/launch.json`
 
-```
+```json
 // A launch configuration that launches the extension inside a new window
 // Use IntelliSense to learn about possible attributes.
 // Hover to view descriptions of existing attributes.
@@ -77,6 +78,30 @@ e.g. `.vscode/launch.json`
         }
       }
     ]
+}
+```
+
+### Run the open file
+
+Sometimes you have multiple runnable scripts in a single project and you want to run the file currently open in your workspace. Examples are a collection of Python scripts or Mocha tests. Here is an example for running the currently open Mocha test.
+
+```json
+{
+  "type": "node",
+  "request": "launch",
+  "name": "Mocha Current File (WSL)",
+  "useWSL": true,
+  "localRoot": "${workspaceFolder}",
+  "remoteRoot": "${command:extension.vscode-wsl-workspaceFolder}",
+  "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+  "args": [
+    "${command:extension.vscode-wsl-workspaceCurrentFile}"
+  ],
+  "skipFiles": [
+    "${command:extension.vscode-wsl-workspaceFolder}/node_modules/**/*.js",
+    "${command:extension.vscode-wsl-workspaceFolder}/lib/**/*.js",
+    "<node_internals>/**"
+  ]
 }
 ```
 
