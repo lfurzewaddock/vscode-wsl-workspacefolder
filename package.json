@@ -77,7 +77,7 @@
   },
   "dependencies": {
     "debug": "^3.1.0",
-    "execa": "^0.10.0",
+    "execa": "^2.1.0",
     "is-wsl": "^1.1.0",
     "vscode": "^1.1.35"
   }
